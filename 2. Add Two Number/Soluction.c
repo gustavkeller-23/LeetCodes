@@ -47,8 +47,6 @@ int main(){
     int numArray2 = gerarNumero(array2);
     int numArray3 = numArray1 + numArray2;
 
-    printf("[%d]", numArray3);
-
     int *array3;
     array3 = gerarArray(numArray3, array3);
     
