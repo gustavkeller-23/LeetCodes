@@ -2,9 +2,8 @@
 #include <stdlib.h>
 
 #define TAM_ARRAY 6
-
+ 
 int *buscarIndices(int array[], int target, int *indice){
-
     for (int i = 0; i < TAM_ARRAY-1; i++){
         for (int j = i+1; j < TAM_ARRAY; j++){
             if (array[i] + array[j] == target){

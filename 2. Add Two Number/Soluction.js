@@ -1,29 +1,31 @@
 
-function gerarNumero(array){
-    let soma = 0;
-    while(array.length > 0)
-        soma += (Math.pow(10, array.length-1))*array.pop();
-    return soma;
-};
+const invertedArray = (array) => {
+    arrayTemp = [];
+    for(let i = array.length-1; i >=0; i--)
+        arrayTemp.push(array[i]);
+    return arrayTemp;
+}
 
 function gerarArray(num){
-    let arrayTemp = [];
+    let newArray = [];
     let numConvertedToString = num.toString();
-    let count = numConvertedToString.length-1;
-    while(count >= 0){
-        arrayTemp.push(Number(numConvertedToString[count]))
-        count--;
-    }
-    return arrayTemp;
+    for(let i = numConvertedToString.length-1; i >=0; i--)
+        newArray.push(Number(numConvertedToString[i]));
+    return newArray;
 };
 
 
-const array1 = [1, 2, 3];
-const array2 = [4, 5, 6];
+const array1 = [6, 2, 3, 5, 4];
+const array2 = [3, 7, 6];
 
-const numArray1 = gerarNumero(array1);
-const numArray2 = gerarNumero(array2);
+const invertedArray1 = invertedArray(array1);
+const invertedArray2 = invertedArray(array2);
+
+const numArray1 = invertedArray1.reduce((accumulator, currentValue) => accumulator*10 + currentValue, 0,);
+const numArray2 = invertedArray2.reduce((accumulator, currentValue) => accumulator*10 + currentValue, 0,);
 const numArray3 = numArray1 + numArray2;
 
 const array3 = gerarArray(numArray3);
-console.log(array3);
+const invertedArray3 = invertedArray(array3);
+
+console.log(invertedArray3);

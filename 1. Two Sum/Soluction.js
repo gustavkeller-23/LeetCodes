@@ -1,17 +1,15 @@
 
 const buscarIndices = () => {
-    let indices = [];
+    let hash = [];
 
     for (let i = 0; i < array.length - 1; i++) {
-        for (let j = i + 1; j < array.length; j++) {
-            if (array[i] + array[j] === target) {
-                indices.push(i);
-                indices.push(j);
-                return indices;
-            }
-        }
-    }
+        let y = target - array[i];
+        
+        if(y in hash)
+            return [hash[y], i];
 
+        hash[array[i]] = i;  
+    }
     return null;
 };
 
@@ -20,8 +18,4 @@ let target = 7;
 
 const indices = buscarIndices();
 
-if (indices == null) {
-    console.log("Não temos valores que resultam nessa soma");
-} else {
-    console.log(`[${indices[0]}, ${indices[1]}]`);
-}
+(indices == null) ? console.log("Não temos valores que resultam nessa soma") : console.log(`[${indices}]`);

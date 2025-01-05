@@ -1,38 +1,40 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#define TAM_ARRAY 6
+#define TAM_ARRAY 20
 
-char *longestSubstring(char array[]){
-    char *newArray = (char *) malloc (TAM_ARRAY * sizeof(char));
-    int positionNewArray = 0;
-    int ahLetra = 0;
+int longestSubstring(char array[]){
+    int sizeLongest = 0;
+    int index[2] = {0,0};
+    int indexTemp=0;
 
-    for (int i = 0; i < TAM_ARRAY-1; i++){
-        for (int j = 0; j < positionNewArray; j++){
-            if(array[i] == newArray[j])
-                ahLetra = 1;
+    for (int i = 1; i < TAM_ARRAY-1 &&  array[i] != '\0'; i++){
+        for (int j = indexTemp; j < i; j++){
+            if(array[j] == array[i] || array[i+1] == '\0'){
+                if (i-indexTemp >= sizeLongest){
+                    index[0] = indexTemp;
+                    index[1] = i-1;
+                    sizeLongest = i-index[0];
+                }
+                indexTemp = j+1;
+            }         
         }
-        if (!ahLetra){
-            newArray[positionNewArray] = array[i];
-            positionNewArray++;
-        }
-        ahLetra = 0;
     }
-    newArray[positionNewArray] = '\0';
-          
-    return newArray;
+
+    if (index[0] == 0 && index[1] == 0)
+        return strlen(array);
+    
+    return index[1]-index[0]+1;
 }
 
 int main(){
-    char array[TAM_ARRAY] = "abbb";
-    char *arrayReduce;
+    char string[TAM_ARRAY] = "pwewke";
+    int sizeSubstring;
 
-    arrayReduce = longestSubstring(array);
+    sizeSubstring = longestSubstring(string);
     
-    printf("[%s, %s]", array, arrayReduce);
-    
-    free(arrayReduce);
+    printf("[%d]", sizeSubstring);
 
     return 0;
 }
